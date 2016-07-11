@@ -21,3 +21,6 @@ export function findWhere(arr, fn, returnIndex, byValueOnly) {
 export function createAttributeFilter(ns, name) {
 	return o => o.ns===ns && toLower(o.name)===toLower(name);
 }
+
+let resolved = typeof Promise!=='undefined' && Promise.resolve();
+export const setImmediate = resolved ? (f => { resolved.then(f); }) : setTimeout;
